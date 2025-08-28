@@ -12,3 +12,5 @@ class Solution:
                 anaDict[key] = [word]
 
         return list(anaDict.values())
+    
+    
