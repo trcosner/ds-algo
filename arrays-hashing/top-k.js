@@ -32,7 +32,6 @@ class Solution {
             while (freq[a].length > 0 && results.length <= k){
                 const val = freq[a].pop()
                 results.push(val)
-                k -= 1
                 console.log({bucketLength: freq[a].length, results})
             }
         }
