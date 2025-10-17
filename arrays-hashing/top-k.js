@@ -1,43 +1,41 @@
 class Solution {
-  /**
-   * @param {number[]} nums
-   * @param {number} k
-   * @return {number[]}
-   */
+    /**
+     * @param {number[]} nums
+     * @param {number} k
+     * @return {number[]}
+     */
+    topKFrequent(nums, k) {
+        // sort nums into buckets where index represents number of occurances
+        // [[],[100], [1,2,3], [],[7]]
+        // nothing occurs 0 times, 100 occurs once, 1,2,3 all 2 times, 7 5 times
+        // start at the end of the array and grab the top k items
+        
+        // keep track of occurence counts
+        const count = new Map()
+        
+        // setting up buckets
+        const freq = [[]]
+        for(let i = 0; i < nums.length; i++){
+            freq.push([])
+            count.set(nums[i], (count.get(nums[i]) || 0) + 1)
+        }
+        
+        // sort counts into buckets
+        for(const [key, val] of count){
+            console.log("test", {freq, val})
+            freq[val].push(key)
+        }
+        const results = []
 
-  /**
-   * Constraints
-   * nums.length at least 1
-   * num valuest between +- 1000
-   * k at least 1
-   */
-  topKFrequent(nums, k) {
-    // keep track of the count for each num
-    // map of counts
-    const map = new Map();
-    for (let num of nums) {
-      map.set(num, (map.get(num) || 0) + 1);
+        //get top k nums from buckets, so start from the end
+        for(let a = freq.length - 1; a > 0; a--){
+            while (freq[a].length > 0 && results.length <= k){
+                const val = freq[a].pop()
+                results.push(val)
+                k -= 1
+                console.log({bucketLength: freq[a].length, results})
+            }
+        }
+        return results
     }
-
-    //create buckets so each bucket[i] is values where count is i
-    const buckets = Array(nums.length + 1)
-      .fill(0) // [0,0,0,0]
-      .map(() => []); // [[],[],[],[]]
-
-    for (let [val, count] of map) {
-      buckets[count].push(val);
-    }
-
-    const answer = [];
-
-    for (let c = buckets.length - 1; c >= 0 && answer.length < k; c--) {
-      for (const v of buckets[c]) {
-        answer.push(v);
-        if (answer.length === k) break;
-      }
-    }
-    return answer;
-  }
 }
-
-// O(n) time complexity O(n) space complexity
