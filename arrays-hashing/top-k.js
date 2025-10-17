@@ -19,20 +19,17 @@ class Solution {
             freq.push([])
             count.set(nums[i], (count.get(nums[i]) || 0) + 1)
         }
-        
         // sort counts into buckets
         for(const [key, val] of count){
-            console.log("test", {freq, val})
             freq[val].push(key)
         }
         const results = []
 
         //get top k nums from buckets, so start from the end
         for(let a = freq.length - 1; a > 0; a--){
-            while (freq[a].length > 0 && results.length <= k){
+            while (freq[a].length > 0 && results.length < k){
                 const val = freq[a].pop()
                 results.push(val)
-                console.log({bucketLength: freq[a].length, results})
             }
         }
         return results
