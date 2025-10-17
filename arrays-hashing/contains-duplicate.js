@@ -1,14 +1,16 @@
-
-hasDuplicate(nums) {
-    const numsDict = {}
-
-    for(let num of nums){
-            if(!!numsDict[num]){
-            return true
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @return {boolean}
+     */
+    hasDuplicate(nums) {
+        const set = new Set()
+        for(const num of nums){
+            if(set.has(num)){
+                return true
+            }
+            set.add(num)
         }
-        numsDict[num] = true
+        return false
     }
-    return false
 }
-
-// O(n) time complexity O(n) space complexity

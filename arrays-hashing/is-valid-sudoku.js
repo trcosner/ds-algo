@@ -8,7 +8,7 @@ class Solution {
     // for each column is col[j] unique
     // for each box is (row / 3) * 3 + (col / 3) unique
 
-    // brute force approach would be for each board[i][j], check every box, column, and row for uniqueness
+    // brute force approach would be for each cell scan the entire row, column, and box for duplicates
 
     // we could define a board using Maps and iterate through the board placing each item in the Map
     // if double entry encountered, return false
